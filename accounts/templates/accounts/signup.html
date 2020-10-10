@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block content %}
+<style>
+#main {
+  display: flex;
+  justify-content: space-around
+}
+</style>
+
+
+{% if error %}
+
+<h1 id='main' style="color:red;">{{ error }}</h1>
+
+{% endif %}
+
+
+
+<h1 id='main'>Sign Up</h1>
+
+
+
+
+<div class='container' id="main">
+<form method='POST' action="{% url 'signup' %}">
+{% csrf_token %}
+Username:
+<br />
+<input type='text' name='username' />
+<br />
+Password:
+<br />
+<input type='text' name='password1' />
+<br />
+Confirm Password:
+<br />
+<input type='text' name='password2' />
+<br />
+<br />
+<input class='btn btn-primary' type='submit' value='Signupp' />
+</div>
+{% endblock %}
