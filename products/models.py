@@ -17,3 +17,7 @@ class Product(models.Model):
     
     def pubdate_modified(self):
         return self.pub_date.strftime('%b %e %Y')
+    
+    
+    def summary(self):
+        return self.body[:100]
