@@ -1,7 +1,8 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .models import Product
 from django.utils import timezone
+from .models import Product
 
 # Create your views here.
 def home(request):
@@ -24,7 +25,14 @@ def create(request):
             #product.votes_total = 1
             product.hunter = request.user
             product.save()
-            return redirect('home')
+            return redirect('/products/' + str(product.id))
         else:
             return render(request, 'products/create.html', {"error": "enter all the fileds"})
     return render(request, 'products/create.html')
+
+def detail(request, product_id):
+    detailproduct = get_object_or_404(Product, pk=product_id)
+    return render(request, 'products/detail.html', {'product': detailproduct})
+
+
+
