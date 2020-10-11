@@ -34,5 +34,17 @@ def detail(request, product_id):
     detailproduct = get_object_or_404(Product, pk=product_id)
     return render(request, 'products/detail.html', {'product': detailproduct})
 
+@login_required
+def upvote(request, product_id):
+    if request.method == "POST":
+        product = get_object_or_404(Product, pk=product_id)
+        product.votes_total += 1
+        product.save()
+        ## either the commented one or the original uncommented return
+    
+        #detailproduct = get_object_or_404(Product, pk=product_id)
+        #return render(request, 'products/detail.html', {'product': detailproduct})
 
+        return redirect('/products/' + str(product.id))  
+    
 
